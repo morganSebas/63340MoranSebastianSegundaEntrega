@@ -1,7 +1,15 @@
 let iva =21
 let intereses = 78
 let impoprte = 0
-let cuotas = 0
+let cuota =0;
+let cuotass = [12,24,12,36,48]
+
+let planCuotas = [] 
+
+/*function planCuotas(cuotaPlan,cuotaPlan){
+  this.cuotaPlan =pCuota;
+  this.importeCuota = pImporte;
+}*/
 
 const seleccionaImporte =() => {
     importe = parseFloat( prompt("Ingrese el monto a Solicitar: "))
@@ -15,14 +23,14 @@ if (importe == 0) {
 
  const seleccionaCuotas =()=>  {
 
- cuotas = parseInt(prompt("Ingrse la cantidad de cuotas, puede ser  12, 24, 36, 48"))
- if (cuotas ==0 && cuotas != 12 && cuotas != 24 && cuotas != 36 && cuotas != 48  ) {
-    while (cuotas != 0 && cuotas != 12 && cuotas != 24 && cuotas != 36 && cuotas !=  48 ) {
+  cuota = parseInt(prompt("Ingrse la cantidad de cuotas"))
+ 
+      while (cuotass.indexOf(cuota) === -1 ) {
         alert("Debe ingresar cuotas de 12, 24, 36 o 48")
-        cuotas = parseFloat( prompt("Ingrese el monto a Solicitar"))
+        cuota = parseFloat( prompt("Ingrese el monto a Solicitar"))
     }
   } 
-}
+
 
 const   calculoCuota = (cantCuota ) => 
 {
@@ -33,21 +41,24 @@ const   calculoCuota = (cantCuota ) =>
      let ImporteCuotaConIVa = importeConInteres *  ( 1 + 21/100)
 
 
-    for (let cuota = 1; cuota <=cuotas; cuota++){
-    console.log( "Cuota: " + cuota + " Importe: " + ImporteCuotaConIVa )
+    for (let itemCuota = 1; itemCuota <=cuota; itemCuota++){
+      
+     planCuotas.push({cuotaPlan:itemCuota,importeCuota:importeConInteres})
     }
+    
+ 
+
+ planCuotas.forEach((f) => {
+  console.log( "Cuota Nro:" + f.cuotaPlan + "  Importe Cuota:" + f.importeCuota  );
+ })
 }
-
-
-
-
 
 function mostrarMenu() {
     let opcion;
   
     do {
       opcion = prompt(
-        " Ingrese una opción: \n\n1 - Ingrse el monto en pesos a solicitar\n2 - Ingrese la cantidad de cuotas: 12 24 36 48 \n3 - Ver lisado de pagos\n4 - Salir"
+        " Ingrese una opción: \n\n1 - Ingrse el monto en pesos a solicitar\n2 - Ingrese la cantidad de cuotas a solicitar \n3 - Ver lisado de pagos\n4 - Salir"
       );
       switch (opcion) {
         case "1":
@@ -57,7 +68,7 @@ function mostrarMenu() {
           seleccionaCuotas();
           break;
         case "3":
-            calculoCuota(cuotas)
+            calculoCuota(cuota)
           break;
         case "4":
           alert("Gracias. Vuelva pronto.");
